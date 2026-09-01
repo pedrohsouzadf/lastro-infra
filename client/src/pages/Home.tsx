@@ -70,7 +70,7 @@ function BrandMark({ compact = false }: { compact?: boolean }) {
         <span className="brand-mark__joint brand-mark__joint--one" />
         <span className="brand-mark__joint brand-mark__joint--two" />
       </span>
-      {!compact && <span className="brand-mark__name">lastro<span>.</span></span>}
+      {!compact && <span className="brand-mark__name">LASTRO<span>.</span></span>}
     </a>
   );
 }
@@ -187,9 +187,9 @@ export default function Home() {
           <div className="hero-glow hero-glow--two" aria-hidden="true" />
           <div className="container hero-section__inner">
             <div className="hero-copy reveal-up">
-              <div className="eyebrow"><span className="eyebrow__line" /> INFRAESTRUTURA PARA EMPRESAS EM CRESCIMENTO</div>
+              <div className="eyebrow"><span className="eyebrow__line" /> INFRAESTRUTURA CLOUD</div>
               <h1>Sua aplicação cresceu.<br /><em>Sua infraestrutura</em> acompanhou?</h1>
-              <p className="hero-copy__intro">O produto funciona. Os clientes chegaram. Agora, transforme o que foi improvisado em uma base pronta para o próximo estágio.</p>
+              <p className="hero-copy__intro"><strong>Infraestrutura que sustenta o crescimento.</strong> O produto funciona. Os clientes chegaram. Agora, transforme o que foi improvisado em uma base pronta para o próximo estágio.</p>
               <div className="hero-actions">
                 <a className="button button--primary" href="#contato">Fazer um raio-X <ArrowRight size={17} /></a>
                 <a className="text-link" href="#metodo">Conheça o método <ArrowUpRight size={16} /></a>
@@ -219,7 +219,7 @@ export default function Home() {
           <div className="container">
             <div className="section-heading section-heading--split reveal-up">
               <div>
-                <div className="eyebrow"><span className="eyebrow__line" /> O MOMENTO DA VIRADA</div>
+              <div className="eyebrow"><span className="eyebrow__line" /> INFRAESTRUTURA QUE SUSTENTA O CRESCIMENTO</div>
                 <h2>O crescimento não<br /><em>espera</em> a arquitetura.</h2>
               </div>
               <p>É quando a velocidade do produto encontra o limite da infraestrutura. Nada quebra de uma vez — os sinais aparecem antes.</p>
