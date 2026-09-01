@@ -66,6 +66,9 @@ function BrandMark({ compact = false }: { compact?: boolean }) {
         <span className="brand-mark__beam brand-mark__beam--one" />
         <span className="brand-mark__beam brand-mark__beam--two" />
         <span className="brand-mark__beam brand-mark__beam--three" />
+        <span className="brand-mark__base" />
+        <span className="brand-mark__joint brand-mark__joint--one" />
+        <span className="brand-mark__joint brand-mark__joint--two" />
       </span>
       {!compact && <span className="brand-mark__name">lastro<span>.</span></span>}
     </a>
