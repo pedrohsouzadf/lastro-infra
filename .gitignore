@@ -1,0 +1,18 @@
+# dependências
+node_modules/
+
+# builds do Next
+.next/
+.next-dev/
+*.tsbuildinfo
+
+# artefatos locais (não versionar)
+_tmp_kit/
+fonte-build.tgz
+
+# ambiente
+.env*.local
+.vercel
+
+# sistema
+.DS_Store

@@ -1,0 +1,20 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="64" height="64" rx="13" fill="#0D1117"/>
+  <defs>
+    <linearGradient id="g" x1="11" y1="8" x2="53" y2="31" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#5CF06F"/><stop offset="1" stop-color="#2BB544"/>
+    </linearGradient>
+    <linearGradient id="m" x1="11" y1="26" x2="53" y2="49" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F2F5F8"/><stop offset="1" stop-color="#A8B2BE"/>
+    </linearGradient>
+    <linearGradient id="b" x1="11" y1="38" x2="53" y2="61" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#B9C2CC"/><stop offset="1" stop-color="#6B7280"/>
+    </linearGradient>
+  </defs>
+  <path d="M11,45 L32,56.5 L53,45 L53,49.5 L32,61 L11,49.5 Z" fill="#3C4653"/>
+  <polygon points="11,45 32,33.5 53,45 32,56.5" fill="url(#b)"/>
+  <path d="M11,32 L32,43.5 L53,32 L53,36.5 L32,48 L11,36.5 Z" fill="#5D6874"/>
+  <polygon points="11,32 32,20.5 53,32 32,43.5" fill="url(#m)"/>
+  <path d="M11,17 L32,28.5 L53,17 L53,21.5 L32,33 L11,21.5 Z" fill="#1F8F35"/>
+  <polygon points="11,17 32,5.5 53,17 32,28.5" fill="url(#g)"/>
+</svg>
