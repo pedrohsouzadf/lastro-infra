@@ -13,11 +13,36 @@ export default function ContactSection() {
     currentCloud: "",
     monthlySpend: "",
   });
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState<"idle" | "enviando" | "ok" | "erro">(
+    "idle"
+  );
+  // honeypot: bots preenchem tudo, inclusive campos que humanos não veem
+  const [website, setWebsite] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const submitted = status === "ok";
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    if (status === "enviando") return;
+    setStatus("enviando");
+
+    try {
+      const r = await fetch("/api/lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          nome: formData.name,
+          empresa: formData.company,
+          email: formData.email,
+          provedor: formData.currentCloud,
+          gasto: formData.monthlySpend,
+          website,
+        }),
+      });
+      setStatus(r.ok ? "ok" : "erro");
+    } catch {
+      setStatus("erro");
+    }
   };
 
   const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
@@ -83,7 +108,7 @@ export default function ContactSection() {
               </a>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-4 relative">
               <div className="font-mono text-[11px] text-accent uppercase tracking-wider">
                 Solicitar Raio-X de Infraestrutura
               </div>
@@ -167,12 +192,43 @@ export default function ContactSection() {
                 <option value="Não sei">Não sei</option>
               </select>
 
+              {/* honeypot — invisível para humanos, irresistível para bots */}
+              <input
+                type="text"
+                name="website"
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                value={website}
+                onChange={(e) => setWebsite(e.target.value)}
+                className="absolute left-[-9999px] w-px h-px opacity-0"
+              />
+
               <button
                 type="submit"
-                className="w-full py-3 text-xs font-semibold uppercase tracking-wider text-[#09110a] bg-accent hover:bg-[#dcff86] transition-colors cursor-pointer font-mono"
+                disabled={status === "enviando"}
+                className="w-full py-3 text-xs font-semibold uppercase tracking-wider text-[#09110a] bg-accent hover:bg-[#4ce066] transition-colors cursor-pointer font-mono disabled:opacity-60 disabled:cursor-wait"
               >
-                Agendar Raio-X
+                {status === "enviando" ? "Enviando…" : "Agendar Raio-X"}
               </button>
+
+              {status === "erro" && (
+                <div
+                  role="alert"
+                  className="text-center font-mono text-[10px] text-[#e0745f] leading-relaxed"
+                >
+                  Não consegui registrar seu pedido.{" "}
+                  <a
+                    href={whatsappUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-accent underline"
+                  >
+                    Fale pelo WhatsApp
+                  </a>{" "}
+                  que eu respondo direto.
+                </div>
+              )}
 
               <div className="text-center font-mono text-[10px] text-[#6c7b73]">
                 Sem cobrança no envio · Diagnóstico em 7 dias
