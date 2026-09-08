@@ -1,76 +1,80 @@
 /**
- * LASTRO — recebe leads do site e grava no Google Sheets.
+ * LASTRO — recebe leads do site, grava no Sheets e avisa por e-mail.
  *
- * Instalação
- * 1. Na planilha: Extensões → Apps Script. Cole este arquivo inteiro.
- * 2. Projeto → Configurações → Propriedades do script → adicione:
- *      TOKEN = <a mesma string que vai em SHEETS_TOKEN na Vercel>
- *    (NÃO deixe o token escrito no código — o /exec é público.)
- * 3. Implantar → Nova implantação → tipo "App da Web"
- *      Executar como .......: Eu
- *      Quem pode acessar ...: Qualquer pessoa
- *    Copie a URL /exec → é o SHEETS_WEBHOOK_URL.
+ * Implantar: Implantar → Nova implantação → App da Web
+ *   Executar como .......: Eu
+ *   Quem pode acessar ...: Qualquer pessoa
+ * A URL /exec é o SHEETS_WEBHOOK_URL do site.
  *
- * Toda vez que editar o script, crie uma NOVA implantação (ou "Gerenciar
- * implantações" → editar → versão "Nova"), senão o /exec continua servindo
- * a versão antiga.
+ * IMPORTANTE: ao editar este arquivo, crie uma NOVA implantação.
+ * Salvar não muda o que a URL /exec serve.
  */
 
-var COLUNAS = [
-  "recebidoEm",
-  "nome",
-  "empresa",
-  "email",
-  "provedor",
-  "gasto",
-  "mensagem",
-  "origem",
-];
+const SHEET_ID = '1A7-3JJwe2e8NKh-6_E_7GUvEpP0IFF4f0rQxOqPeIyA';
+const TOKEN    = 'mxPMYfz_qR4ox6tPwDnTr11UrFn6dXPM';
+const AVISO    = 'contato@lastro.cloud';
+const ABA      = 'leads';
 
 function doPost(e) {
-  var lock = LockService.getScriptLock();
   try {
-    // duas submissões simultâneas podem escrever na mesma linha sem isto
-    lock.waitLock(20000);
+    const d = JSON.parse(e.postData.contents);
 
-    var corpo = JSON.parse(e.postData.contents);
-    var esperado = PropertiesService.getScriptProperties().getProperty("TOKEN");
-
-    if (!esperado || corpo.token !== esperado) {
-      return json({ ok: false, error: "unauthorized" });
+    if (d.token !== TOKEN) {
+      return json({ ok: false, error: 'unauthorized' });
     }
 
-    var aba = SpreadsheetApp.getActiveSpreadsheet().getSheets()[0];
+    const planilha = SpreadsheetApp.openById(SHEET_ID);
+    // getSheetByName devolve null se a aba não existir — sem isto, o
+    // appendRow estoura e o lead é perdido por causa do nome de uma aba.
+    const aba = planilha.getSheetByName(ABA) || planilha.insertSheet(ABA);
 
-    // cabeçalho na primeira execução
     if (aba.getLastRow() === 0) {
-      aba.appendRow(COLUNAS);
-      aba.getRange(1, 1, 1, COLUNAS.length).setFontWeight("bold");
+      aba.appendRow(['data', 'nome', 'empresa', 'email', 'provedor', 'gasto', 'mensagem', 'origem']);
+      aba.getRange(1, 1, 1, 8).setFontWeight('bold');
       aba.setFrozenRows(1);
     }
 
-    aba.appendRow(
-      COLUNAS.map(function (c) {
-        return corpo[c] || "";
-      })
-    );
+    aba.appendRow([
+      new Date(),
+      d.nome     || '',
+      d.empresa  || '',
+      d.email    || '',
+      d.provedor || '',
+      d.gasto    || '',
+      d.mensagem || '',
+      d.origem   || 'landing'
+    ]);
+
+    // O e-mail é secundário: se a cota do MailApp estourar ou o endereço
+    // falhar, o lead JÁ está na planilha e a resposta tem que ser ok.
+    // Sem este try/catch, o site mostraria erro, a pessoa reenviaria,
+    // e a planilha ficaria com linhas duplicadas.
+    try {
+      MailApp.sendEmail({
+        to: AVISO,
+        subject: `Novo lead Lastro — ${d.empresa || d.nome}`,
+        body: `${d.nome} · ${d.empresa}\n${d.email}\n\n`
+            + `Provedor: ${d.provedor}\nGasto mensal: ${d.gasto}\n\n${d.mensagem || ''}`
+      });
+    } catch (mailErr) {
+      console.error('lead gravado, e-mail falhou:', mailErr);
+    }
 
     return json({ ok: true });
   } catch (err) {
     console.error(err);
     return json({ ok: false, error: String(err) });
-  } finally {
-    lock.releaseLock();
   }
 }
 
-// GET serve só para conferir que a implantação está no ar
+// Abrir a /exec no navegador deve mostrar este JSON — é o teste de que a
+// implantação está no ar antes de mexer no site.
 function doGet() {
-  return json({ ok: true, status: "lastro lead endpoint" });
+  return json({ ok: true, status: 'lastro lead endpoint' });
 }
 
 function json(obj) {
-  return ContentService.createTextOutput(JSON.stringify(obj)).setMimeType(
-    ContentService.MimeType.JSON
-  );
+  return ContentService
+    .createTextOutput(JSON.stringify(obj))
+    .setMimeType(ContentService.MimeType.JSON);
 }
