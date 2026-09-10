@@ -4,6 +4,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import Hero from "@/components/Hero";
 import SignalBar from "@/components/SignalBar";
 import ProblemSection from "@/components/ProblemSection";
+import UrgencySection from "@/components/UrgencySection";
 import MethodSection from "@/components/MethodSection";
 import ServicesSection from "@/components/ServicesSection";
 import DiagnosticSection from "@/components/DiagnosticSection";
@@ -22,6 +23,7 @@ export default function Home() {
         <Hero />
         <SignalBar />
         <ProblemSection />
+        <UrgencySection />
         <MethodSection />
         <ServicesSection />
         <DiagnosticSection />
