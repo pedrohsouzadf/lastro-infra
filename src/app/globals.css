@@ -1713,13 +1713,9 @@ h1 em, h2 em {
   border-top: 1px solid var(--line);
 }
 
-.section--urgency .section-heading {
-  margin-bottom: 44px;
-}
-
-.section--urgency .eyebrow {
-  color: #8a97a3;
-}
+.section--urgency .eyebrow { color: #8a97a3; }
+.section--urgency .section-heading h2 { color: var(--paper); }
+.section--urgency .section-heading p { color: #7f8c99; }
 
 /* Réguas via border-top de cada item: com column-gap zero elas se emendam
    numa linha horizontal contínua. Fundo na grade + gap de 1px produziria o
@@ -1735,55 +1731,35 @@ h1 em, h2 em {
   border-bottom: 1px solid rgba(210, 232, 216, 0.14);
 }
 
+/* Escala de corpo de texto, não de título: são a lista, não o protagonista */
 .urgency__item {
   display: flex;
   align-items: center;
-  min-height: 130px;
-  padding: 34px 56px 34px 0;
+  min-height: 76px;
+  padding: 22px 40px 22px 0;
   border-top: 1px solid rgba(210, 232, 216, 0.14);
-  font-family: var(--font-display);
-  font-size: 22px;
-  font-weight: 600;
-  line-height: 1.15;
-  letter-spacing: -0.04em;
-  color: var(--paper);
-  text-wrap: balance;
-}
-
-/* Escala de subtítulo (~65% do h2 das outras seções): esta é uma seção de
-   apoio — se o fechamento tivesse o maior tipo da página, o olho pousaria
-   nele antes dos gatilhos e os seis viravam legenda. */
-.urgency__footer {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 18px;
-  margin-top: 46px;
-}
-
-.urgency__close {
-  max-width: 560px;
-  margin: 0;
-  font-family: var(--font-display);
-  font-size: clamp(17px, 1.7vw, 21px);
+  font-family: var(--font-body);
+  font-size: 16px;
   font-weight: 500;
-  line-height: 1.4;
-  letter-spacing: -0.02em;
-  color: var(--paper);
-  text-wrap: balance;
+  line-height: 1.45;
+  color: #dfe5eb;
+}
+
+.urgency__link {
+  margin-top: 34px;
 }
 
 @media (max-width: 900px) {
   .urgency__list { grid-template-columns: repeat(2, 1fr); }
-  .urgency__item { font-size: 20px; padding-right: 40px; }
+  .urgency__item { padding-right: 28px; }
 }
 
 @media (max-width: 560px) {
   .urgency__list { grid-template-columns: 1fr; }
   .urgency__item {
     min-height: 0;
-    padding: 24px 0;
-    font-size: 19px;
+    padding: 18px 0;
+    font-size: 15px;
   }
-  .urgency__footer { margin-top: 40px; gap: 18px; }
+  .urgency__link { margin-top: 28px; }
 }
