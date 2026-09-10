@@ -5,10 +5,10 @@ import React from "react";
  *
  * Fica aqui de propósito: a seção anterior faz o visitante concordar de
  * forma abstrata; esta converte a concordância em reconhecimento pessoal,
- * antes da oferta. Depois do CTA viraria lembrete para quem já decidiu.
+ * antes da oferta.
  *
  * Sem card, sem número e sem ícone: os sinais são paralelos, não têm
- * hierarquia nem sequência — numerar inventaria uma ordem que não existe.
+ * hierarquia nem sequência.
  */
 
 const GATILHOS = [
@@ -22,9 +22,13 @@ const GATILHOS = [
 
 export default function UrgencySection() {
   return (
-    <section className="urgency" id="urgente">
+    <section className="section section--urgency" id="urgente">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <h2 className="urgency__title reveal-up">Quando isso vira urgente</h2>
+        <div className="section-heading reveal-up">
+          <div className="eyebrow">
+            <span className="eyebrow__line" /> QUANDO ISSO VIRA URGENTE
+          </div>
+        </div>
 
         <ul className="urgency__list reveal-up">
           {GATILHOS.map((gatilho) => (
@@ -34,10 +38,11 @@ export default function UrgencySection() {
           ))}
         </ul>
 
-        <p className="urgency__close reveal-up">
-          Se você reconheceu algum desses,{" "}
+        <h2 className="urgency__close reveal-up">
+          Se você reconheceu algum desses,
+          <br />
           <em>não é hora de esperar o próximo.</em>
-        </p>
+        </h2>
       </div>
     </section>
   );
