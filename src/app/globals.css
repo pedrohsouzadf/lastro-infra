@@ -1750,21 +1750,27 @@ h1 em, h2 em {
   text-wrap: balance;
 }
 
-/* mesma escala do h2 das outras seções */
-.urgency__close {
-  margin: 56px 0 0;
-  font-family: var(--font-display);
-  font-size: clamp(34px, 4.5vw, 54px);
-  font-weight: 600;
-  line-height: 1.05;
-  letter-spacing: -0.05em;
-  color: #7d8a95;
-  text-wrap: balance;
+/* Escala de subtítulo (~65% do h2 das outras seções): esta é uma seção de
+   apoio — se o fechamento tivesse o maior tipo da página, o olho pousaria
+   nele antes dos gatilhos e os seis viravam legenda. */
+.urgency__footer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 22px;
+  margin-top: 52px;
 }
 
-.urgency__close em {
-  font-style: normal;
+.urgency__close {
+  max-width: 720px;
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(22px, 2.9vw, 35px);
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.03em;
   color: var(--paper);
+  text-wrap: balance;
 }
 
 @media (max-width: 900px) {
@@ -1779,5 +1785,5 @@ h1 em, h2 em {
     padding: 24px 0;
     font-size: 19px;
   }
-  .urgency__close { margin-top: 44px; }
+  .urgency__footer { margin-top: 40px; gap: 18px; }
 }

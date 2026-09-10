@@ -1,4 +1,5 @@
 import React from "react";
+import { ArrowUpRight } from "lucide-react";
 
 /**
  * Gatilhos de urgência — faixa entre "O problema" e "Método".
@@ -16,7 +17,7 @@ const GATILHOS = [
   "Quem montou a infra saiu da empresa",
   "Um cliente grande pediu questionário de segurança",
   "O sistema caiu em horário de pico",
-  "Entrou investidor e apareceu due diligence",
+  "Due diligence de investidor",
   "O time gasta mais tempo apagando incêndio que entregando feature",
 ];
 
@@ -38,11 +39,14 @@ export default function UrgencySection() {
           ))}
         </ul>
 
-        <h2 className="urgency__close reveal-up">
-          Se você reconheceu algum desses,
-          <br />
-          <em>não é hora de esperar o próximo.</em>
-        </h2>
+        <div className="urgency__footer reveal-up">
+          <h2 className="urgency__close">
+            Se você reconheceu algum desses, não espere o próximo acontecer.
+          </h2>
+          <a className="text-link" href="#contato">
+            Conversar sobre o seu cenário <ArrowUpRight size={16} />
+          </a>
+        </div>
       </div>
     </section>
   );
