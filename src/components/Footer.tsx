@@ -23,6 +23,9 @@ export default function Footer() {
           <a href="mailto:contato@lastro.cloud">
             e-mail <ArrowUpRight size={14} />
           </a>
+          <a href="/privacidade">
+            privacidade <ArrowUpRight size={14} />
+          </a>
         </div>
       </div>
     </footer>

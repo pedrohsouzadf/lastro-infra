@@ -233,6 +233,13 @@ export default function ContactSection() {
               <div className="text-center font-mono text-[10px] text-[#6c7b73]">
                 Sem cobrança no envio · Diagnóstico em 7 dias
               </div>
+
+              <p className="form-consent">
+                Ao enviar, você autoriza a LASTRO a usar estes dados para entrar
+                em contato sobre o diagnóstico. Não compartilhamos com terceiros
+                e você pode pedir a exclusão a qualquer momento.{" "}
+                <a href="/privacidade">Política de privacidade</a>.
+              </p>
             </form>
           )}
         </div>

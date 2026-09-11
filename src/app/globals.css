@@ -1763,3 +1763,123 @@ h1 em, h2 em {
   }
   .urgency__link { margin-top: 28px; }
 }
+
+/* Linha de consentimento do formulário (LGPD) */
+.form-consent {
+  margin: 14px 0 0;
+  font-family: var(--font-body);
+  font-size: 11px;
+  line-height: 1.6;
+  color: #6c7b73;
+  text-align: center;
+}
+
+.form-consent a {
+  color: #93a29a;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.18s ease;
+}
+
+.form-consent a:hover {
+  color: var(--green);
+}
+
+/* ==========================================================================
+   Páginas legais (privacidade)
+   ========================================================================== */
+
+.legal {
+  padding: 110px 0 120px;
+  background: var(--ink);
+}
+
+.legal__back {
+  display: inline-block;
+  margin-bottom: 44px;
+  color: #7f8c99;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  transition: color 0.18s ease;
+}
+
+.legal__back:hover { color: var(--green); }
+
+.legal__eyebrow { margin-bottom: 20px; }
+
+.legal h1 {
+  margin: 0 0 12px;
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4vw, 46px);
+  font-weight: 600;
+  letter-spacing: -0.045em;
+  line-height: 1.05;
+  color: var(--paper);
+}
+
+.legal__meta {
+  margin: 0 0 38px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: #6c7b85;
+}
+
+.legal__lead {
+  margin: 0 0 12px;
+  font-size: 17px;
+  line-height: 1.7;
+  color: #c3ccd4;
+}
+
+.legal h2 {
+  margin: 46px 0 14px;
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  color: var(--paper);
+}
+
+.legal p,
+.legal li {
+  font-size: 15px;
+  line-height: 1.75;
+  color: #98a4ae;
+}
+
+.legal p { margin: 0 0 14px; }
+
+.legal ul {
+  margin: 0 0 14px;
+  padding-left: 20px;
+}
+
+.legal li { margin-bottom: 6px; }
+
+.legal strong { color: #cfd7de; font-weight: 600; }
+
+.legal a {
+  color: var(--paper);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.18s ease;
+}
+
+.legal a:hover { color: var(--green); }
+
+.legal a svg { display: inline; vertical-align: -1px; }
+
+.legal__cta {
+  margin-top: 52px;
+  padding-top: 32px;
+  border-top: 1px solid var(--line);
+  width: 100%;
+  text-decoration: none;
+}
+
+@media (max-width: 560px) {
+  .legal { padding: 88px 0 90px; }
+  .legal h2 { margin-top: 36px; }
+}
