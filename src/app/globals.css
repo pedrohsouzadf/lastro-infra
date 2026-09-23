@@ -1019,12 +1019,18 @@ h1 em, h2 em {
   color: #84938a;
 }
 
+/* Base de 6 colunas para 5 cards sem buraco: 2+2+2 na primeira fileira,
+   3+3 na segunda. Com repeat(4, 1fr) o quinto card ficava órfão e a grade
+   abria um vão na última linha. */
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   border-top: 1px solid var(--line);
   border-left: 1px solid var(--line);
 }
+
+.services-grid > *:nth-child(-n + 3) { grid-column: span 2; }
+.services-grid > *:nth-child(n + 4) { grid-column: span 3; }
 
 .service-card {
   min-height: 310px;
@@ -1487,6 +1493,10 @@ h1 em, h2 em {
   .services-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+  .services-grid > *:nth-child(-n + 3),
+  .services-grid > *:nth-child(n + 4) { grid-column: span 1; }
+  /* o quinto card fecha a fileira ímpar ocupando as duas colunas */
+  .services-grid > *:nth-child(5) { grid-column: span 2; }
   .service-card {
     min-height: 290px;
   }
@@ -1557,6 +1567,7 @@ h1 em, h2 em {
   .services-grid {
     grid-template-columns: 1fr;
   }
+  .services-grid > *:nth-child(n) { grid-column: span 1; }
   .workflow-item {
     grid-template-columns: 40px 1fr 18px;
     gap: 12px;

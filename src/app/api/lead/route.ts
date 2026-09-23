@@ -15,6 +15,7 @@ type Lead = {
   email?: string;
   provedor?: string;
   gasto?: string;
+  operadores?: string;
   mensagem?: string;
   website?: string; // honeypot
 };
@@ -56,6 +57,7 @@ export async function POST(req: Request) {
     email: limpa(body.email),
     provedor: limpa(body.provedor),
     gasto: limpa(body.gasto),
+    operadores: limpa(body.operadores),
     mensagem: limpa(body.mensagem),
   };
 

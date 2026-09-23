@@ -1,5 +1,5 @@
 import React from "react";
-import { Gauge, Activity, LockKeyhole } from "lucide-react";
+import { Gauge, Activity, UserRoundX } from "lucide-react";
 
 export default function ProblemSection() {
   return (
@@ -76,24 +76,25 @@ export default function ProblemSection() {
             </div>
           </article>
 
-          {/* Card 03: Risco e Homem-Chave */}
+          {/* Card 03: Dependência de uma pessoa só */}
           <article className="problem-card reveal-up reveal-up--delay">
             <span className="problem-card__index">/ 03</span>
             <span className="problem-card__icon">
-              <LockKeyhole size={28} />
+              <UserRoundX size={28} />
             </span>
             <h3>
-              Risco invisível
+              Uma pessoa só
               <br />
-              na operação diária
+              sabe operar
             </h3>
             <p>
-              Chaves mestras soltas, backups que nunca foram restaurados para valer
-              e infraestrutura que só uma pessoa entende.
+              Se quem montou a infraestrutura tirar férias, pedir demissão ou
+              ficar doente, ninguém restaura o banco, publica uma correção ou
+              revoga um acesso.
             </p>
             <div className="problem-card__log">
               <span className="log-dot" />
-              <span>teste real de restore:</span> <b>nunca feito</b>
+              <span>pessoas que conseguem operar:</span> <b>1</b>
             </div>
           </article>
         </div>

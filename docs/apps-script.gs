@@ -29,8 +29,8 @@ function doPost(e) {
     const aba = planilha.getSheetByName(ABA) || planilha.insertSheet(ABA);
 
     if (aba.getLastRow() === 0) {
-      aba.appendRow(['data', 'nome', 'empresa', 'email', 'provedor', 'gasto', 'mensagem', 'origem']);
-      aba.getRange(1, 1, 1, 8).setFontWeight('bold');
+      aba.appendRow(['data', 'nome', 'empresa', 'email', 'provedor', 'gasto', 'operadores', 'mensagem', 'origem']);
+      aba.getRange(1, 1, 1, 9).setFontWeight('bold');
       aba.setFrozenRows(1);
     }
 
@@ -40,8 +40,9 @@ function doPost(e) {
       d.empresa  || '',
       d.email    || '',
       d.provedor || '',
-      d.gasto    || '',
-      d.mensagem || '',
+      d.gasto      || '',
+      d.operadores || '',
+      d.mensagem   || '',
       d.origem   || 'landing'
     ]);
 
@@ -54,7 +55,7 @@ function doPost(e) {
         to: AVISO,
         subject: `Novo lead Lastro — ${d.empresa || d.nome}`,
         body: `${d.nome} · ${d.empresa}\n${d.email}\n\n`
-            + `Provedor: ${d.provedor}\nGasto mensal: ${d.gasto}\n\n${d.mensagem || ''}`
+            + `Provedor: ${d.provedor}\nGasto mensal: ${d.gasto}\nQuem opera: ${d.operadores}\n\n${d.mensagem || ''}`
       });
     } catch (mailErr) {
       console.error('lead gravado, e-mail falhou:', mailErr);

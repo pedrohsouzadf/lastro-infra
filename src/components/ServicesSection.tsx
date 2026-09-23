@@ -1,5 +1,12 @@
 import React from "react";
-import { Network, ShieldCheck, Gauge, Activity, ArrowUpRight } from "lucide-react";
+import {
+  Network,
+  ShieldCheck,
+  Gauge,
+  Activity,
+  Users,
+  ArrowUpRight,
+} from "lucide-react";
 
 const services = [
   {
@@ -33,6 +40,14 @@ const services = [
     description:
       "Visibilidade para transformar custo cloud em decisão de negócio, sem cortar o que sustenta o produto.",
     tags: ["Custos", "Alertas", "Otimização"],
+  },
+  {
+    number: "05",
+    icon: Users,
+    title: "Continuidade & autonomia",
+    description:
+      "Documentação viva, runbook de incidentes e acessos organizados. A operação deixa de depender de uma pessoa.",
+    tags: ["Runbooks", "Documentação", "Gestão de acessos", "Procedimentos"],
   },
 ];
 

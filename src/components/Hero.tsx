@@ -26,6 +26,8 @@ export default function Hero() {
             <strong>Infraestrutura que sustenta o crescimento.</strong> A LASTRO
             cuida de custo, segurança, backup e performance da infraestrutura de
             empresas que têm sistema em produção e não têm um time de DevOps.
+            Quando a infraestrutura depende de uma pessoa só, ela não é uma base
+            — é um risco.
           </p>
 
           <div className="hero-actions">

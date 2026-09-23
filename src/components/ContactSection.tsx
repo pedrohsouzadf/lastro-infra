@@ -12,6 +12,7 @@ export default function ContactSection() {
     company: "",
     currentCloud: "",
     monthlySpend: "",
+    operators: "",
   });
   const [status, setStatus] = useState<"idle" | "enviando" | "ok" | "erro">(
     "idle"
@@ -36,6 +37,7 @@ export default function ContactSection() {
           email: formData.email,
           provedor: formData.currentCloud,
           gasto: formData.monthlySpend,
+          operadores: formData.operators,
           website,
         }),
       });
@@ -172,25 +174,48 @@ export default function ContactSection() {
                 </select>
               </div>
 
-              <select
-                required
-                value={formData.monthlySpend}
-                onChange={(e) =>
-                  setFormData({ ...formData, monthlySpend: e.target.value })
-                }
-                className={`w-full px-3.5 py-2.5 bg-[#0b1110] border border-[rgba(210,232,216,0.15)] text-xs focus:outline-none focus:border-accent ${
-                  formData.monthlySpend === "" ? "text-[#526359]" : "text-paper"
-                }`}
-              >
-                <option value="" disabled>
-                  Gasto mensal em nuvem e infraestrutura
-                </option>
-                <option value="Até R$ 2 mil">Até R$ 2 mil</option>
-                <option value="R$ 2–10 mil">R$ 2–10 mil</option>
-                <option value="R$ 10–30 mil">R$ 10–30 mil</option>
-                <option value="Acima de R$ 30 mil">Acima de R$ 30 mil</option>
-                <option value="Não sei">Não sei</option>
-              </select>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <select
+                  required
+                  value={formData.monthlySpend}
+                  onChange={(e) =>
+                    setFormData({ ...formData, monthlySpend: e.target.value })
+                  }
+                  className={`w-full px-3.5 py-2.5 bg-[#0b1110] border border-[rgba(210,232,216,0.15)] text-xs focus:outline-none focus:border-accent ${
+                    formData.monthlySpend === "" ? "text-[#526359]" : "text-paper"
+                  }`}
+                >
+                  <option value="" disabled>
+                    Gasto mensal em nuvem
+                  </option>
+                  <option value="Até R$ 2 mil">Até R$ 2 mil</option>
+                  <option value="R$ 2–10 mil">R$ 2–10 mil</option>
+                  <option value="R$ 10–30 mil">R$ 10–30 mil</option>
+                  <option value="Acima de R$ 30 mil">Acima de R$ 30 mil</option>
+                  <option value="Não sei">Não sei</option>
+                </select>
+
+                <select
+                  required
+                  value={formData.operators}
+                  onChange={(e) =>
+                    setFormData({ ...formData, operators: e.target.value })
+                  }
+                  aria-label="Quantas pessoas conseguem operar a infraestrutura hoje?"
+                  className={`w-full px-3.5 py-2.5 bg-[#0b1110] border border-[rgba(210,232,216,0.15)] text-xs focus:outline-none focus:border-accent ${
+                    formData.operators === "" ? "text-[#526359]" : "text-paper"
+                  }`}
+                >
+                  <option value="" disabled>
+                    Quem consegue operar a infra?
+                  </option>
+                  <option value="Uma pessoa">Uma pessoa</option>
+                  <option value="Duas ou três">Duas ou três</option>
+                  <option value="Quatro ou mais">Quatro ou mais</option>
+                  <option value="Temos time dedicado">Temos time dedicado</option>
+                  <option value="Não sei">Não sei</option>
+                </select>
+              </div>
 
               {/* honeypot — invisível para humanos, irresistível para bots */}
               <input

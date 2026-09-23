@@ -63,12 +63,20 @@ export default function FAQSection() {
                   role="region"
                   aria-labelledby={headingId}
                   className={`overflow-hidden transition-all duration-200 ${
-                    isOpen ? "max-h-96 pb-6 opacity-100" : "max-h-0 opacity-0"
+                    isOpen ? "max-h-[60rem] pb-6 opacity-100" : "max-h-0 opacity-0"
                   }`}
                 >
-                  <p className="font-body text-sm sm:text-base text-[#9ba9a1] leading-relaxed max-w-[70ch]">
-                    {item.answer}
-                  </p>
+                  {/* respostas com mais de um parágrafo vêm separadas por \n\n */}
+                  <div className="space-y-3">
+                    {item.answer.split("\n\n").map((paragrafo, i) => (
+                      <p
+                        key={i}
+                        className="font-body text-sm sm:text-base text-[#9ba9a1] leading-relaxed max-w-[70ch]"
+                      >
+                        {paragrafo}
+                      </p>
+                    ))}
+                  </div>
                 </div>
               </div>
             );
