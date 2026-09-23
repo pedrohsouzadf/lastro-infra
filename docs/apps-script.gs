@@ -12,11 +12,36 @@
 
 const SHEET_ID = '1A7-3JJwe2e8NKh-6_E_7GUvEpP0IFF4f0rQxOqPeIyA';
 const TOKEN    = 'mxPMYfz_qR4ox6tPwDnTr11UrFn6dXPM';
-const AVISO    = 'contato@lastro.cloud';
+const AVISO    = 'pedrohsouzadf@gmail.com';
 const ABA      = 'leads';
 
+/**
+ * Ordem canônica das colunas.
+ *
+ * A linha é montada pelo CABEÇALHO da planilha, nunca por posição fixa.
+ * Assim, acrescentar um campo aqui basta: o script cria a coluna que
+ * faltar e continua gravando certo nas linhas antigas. Com appendRow de
+ * posição fixa, adicionar um campo no meio desalinharia tudo que já
+ * estava gravado.
+ */
+const COLUNAS = [
+  'data',
+  'nome',
+  'empresa',
+  'email',
+  'provedor',
+  'gasto',
+  'operadores',
+  'mensagem',
+  'origem'
+];
+
 function doPost(e) {
+  const lock = LockService.getScriptLock();
   try {
+    // Dois envios simultâneos podem disputar a mesma linha sem isto.
+    lock.waitLock(20000);
+
     const d = JSON.parse(e.postData.contents);
 
     if (d.token !== TOKEN) {
@@ -28,23 +53,23 @@ function doPost(e) {
     // appendRow estoura e o lead é perdido por causa do nome de uma aba.
     const aba = planilha.getSheetByName(ABA) || planilha.insertSheet(ABA);
 
-    if (aba.getLastRow() === 0) {
-      aba.appendRow(['data', 'nome', 'empresa', 'email', 'provedor', 'gasto', 'operadores', 'mensagem', 'origem']);
-      aba.getRange(1, 1, 1, 9).setFontWeight('bold');
-      aba.setFrozenRows(1);
-    }
+    const cabecalho = garanteCabecalho(aba);
 
-    aba.appendRow([
-      new Date(),
-      d.nome     || '',
-      d.empresa  || '',
-      d.email    || '',
-      d.provedor || '',
-      d.gasto      || '',
-      d.operadores || '',
-      d.mensagem   || '',
-      d.origem   || 'landing'
-    ]);
+    const valores = {
+      data:       new Date(),
+      nome:       d.nome       || '',
+      empresa:    d.empresa    || '',
+      email:      d.email      || '',
+      provedor:   d.provedor   || '',
+      gasto:      d.gasto      || '',
+      operadores: d.operadores || '',
+      mensagem:   d.mensagem   || '',
+      origem:     d.origem     || 'landing'
+    };
+
+    aba.appendRow(cabecalho.map(function (coluna) {
+      return valores[coluna] !== undefined ? valores[coluna] : '';
+    }));
 
     // O e-mail é secundário: se a cota do MailApp estourar ou o endereço
     // falhar, o lead JÁ está na planilha e a resposta tem que ser ok.
@@ -55,7 +80,10 @@ function doPost(e) {
         to: AVISO,
         subject: `Novo lead Lastro — ${d.empresa || d.nome}`,
         body: `${d.nome} · ${d.empresa}\n${d.email}\n\n`
-            + `Provedor: ${d.provedor}\nGasto mensal: ${d.gasto}\nQuem opera: ${d.operadores}\n\n${d.mensagem || ''}`
+            + `Provedor: ${d.provedor}\n`
+            + `Gasto mensal: ${d.gasto}\n`
+            + `Quem opera a infra: ${d.operadores}\n\n`
+            + `${d.mensagem || ''}`
       });
     } catch (mailErr) {
       console.error('lead gravado, e-mail falhou:', mailErr);
@@ -65,7 +93,42 @@ function doPost(e) {
   } catch (err) {
     console.error(err);
     return json({ ok: false, error: String(err) });
+  } finally {
+    lock.releaseLock();
   }
+}
+
+/**
+ * Devolve o cabeçalho da aba, criando-o na primeira execução e
+ * acrescentando à direita qualquer coluna de COLUNAS que ainda não
+ * exista. Nenhuma coluna é movida ou removida — o histórico continua
+ * alinhado.
+ */
+function garanteCabecalho(aba) {
+  if (aba.getLastRow() === 0) {
+    aba.appendRow(COLUNAS);
+    aba.getRange(1, 1, 1, COLUNAS.length).setFontWeight('bold');
+    aba.setFrozenRows(1);
+    return COLUNAS.slice();
+  }
+
+  const atual = aba
+    .getRange(1, 1, 1, aba.getLastColumn())
+    .getValues()[0]
+    .map(function (celula) { return String(celula).trim(); });
+
+  const faltando = COLUNAS.filter(function (coluna) {
+    return atual.indexOf(coluna) === -1;
+  });
+
+  if (faltando.length) {
+    aba.getRange(1, atual.length + 1, 1, faltando.length)
+       .setValues([faltando])
+       .setFontWeight('bold');
+    return atual.concat(faltando);
+  }
+
+  return atual;
 }
 
 // Abrir a /exec no navegador deve mostrar este JSON — é o teste de que a

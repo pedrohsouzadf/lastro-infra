@@ -5,14 +5,9 @@ export interface FAQItem {
 
 export const faqItems: FAQItem[] = [
   {
-    question: "Meu desenvolvedor já cuida disso. Por que contratar a LASTRO?",
+    question: "Contratar a LASTRO substitui meu desenvolvedor?",
     answer:
-      "A ideia não é substituir seu desenvolvedor — ele conhece as regras de negócio e o produto melhor do que ninguém. O objetivo é liberar o tempo dele. Enquanto ele constrói as features que trazem receita, a LASTRO analisa e blinda especificamente custos, segurança de credenciais, rotinas de backup, resiliência e escalabilidade da nuvem.",
-  },
-  {
-    question: "E se a gente já tem um desenvolvedor que cuida disso?",
-    answer:
-      "Ter alguém responsável já é melhor do que não ter ninguém. O ponto é entender quanto da operação depende exclusivamente dessa pessoa.\n\nQuem consegue operar a infraestrutura se ela estiver de férias? Quem sabe restaurar um backup? Revogar um acesso? Investigar uma falha?\n\nA LASTRO pode atuar como uma segunda camada: documentando conhecimento crítico, estruturando processos e reduzindo a dependência de uma única pessoa.",
+      "Não. Ele conhece as regras de negócio e o produto melhor do que ninguém, e ter alguém responsável já é melhor do que não ter ninguém. A pergunta é outra: quanto da operação depende exclusivamente dessa pessoa?\n\nQuem consegue operar a infraestrutura se ela estiver de férias? Quem sabe restaurar um backup? Revogar um acesso? Investigar uma falha às duas da manhã?\n\nA LASTRO entra como segunda camada. Enquanto seu desenvolvedor constrói as features que trazem receita, cuidamos de custo, segurança de credenciais, backup, resiliência e escala — documentando o conhecimento crítico e estruturando processos, para a operação deixar de depender de uma pessoa só.",
   },
   {
     question: "Não temos problemas aparentes hoje. Por que fazer o Raio-X agora?",
