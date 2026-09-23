@@ -1,13 +1,20 @@
 /**
  * LASTRO — recebe leads do site, grava no Sheets e avisa por e-mail.
  *
- * Implantar: Implantar → Nova implantação → App da Web
+ * PRIMEIRA publicação: Implantar → Nova implantação → App da Web
  *   Executar como .......: Eu
  *   Quem pode acessar ...: Qualquer pessoa
- * A URL /exec é o SHEETS_WEBHOOK_URL do site.
+ * A URL /exec que sai daí é o SHEETS_WEBHOOK_URL do site.
  *
- * IMPORTANTE: ao editar este arquivo, crie uma NOVA implantação.
- * Salvar não muda o que a URL /exec serve.
+ * ATUALIZAR depois: Implantar → Gerenciar implantações → lápis (editar)
+ * → Versão: "Nova versão" → Implantar. Isso mantém a MESMA URL /exec.
+ *
+ * Não use "Nova implantação" para atualizar: ela gera uma URL nova, o
+ * site continua chamando a antiga, e a antiga segue servindo o código
+ * velho — parece que a alteração não pegou.
+ *
+ * Salvar (💾) não publica nada. O /exec fica congelado na versão
+ * publicada até você criar uma versão nova explicitamente.
  */
 
 const SHEET_ID = '1A7-3JJwe2e8NKh-6_E_7GUvEpP0IFF4f0rQxOqPeIyA';
