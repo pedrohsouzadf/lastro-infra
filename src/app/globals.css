@@ -821,7 +821,7 @@ h1 em, h2 em {
 .problem-card__wave span {
   flex: 1;
   display: block;
-  background: rgba(201,245,106,0.44);
+  background: rgba(57,211,83,0.30);
 }
 
 .problem-card__wave span:nth-child(1) { height: 25%; }
@@ -906,7 +906,7 @@ h1 em, h2 em {
 
 .workflow-item:hover {
   padding-left: 12px;
-  background: rgba(201,245,106,0.025);
+  background: rgba(57,211,83,0.03);
 }
 
 .workflow-item__number {
@@ -1212,8 +1212,38 @@ h1 em, h2 em {
 .stack-layout {
   display: grid;
   grid-template-columns: 0.8fr 1.2fr;
-  gap: 10%;
-  align-items: center;
+  gap: 8%;
+  align-items: start;
+}
+
+.stack-groups {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.stack-group {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.stack-group__label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #8a9790;
+}
+
+.stack-note {
+  margin: 6px 0 0;
+  padding-top: 22px;
+  border-top: 1px solid rgba(13, 17, 18, 0.12);
+  max-width: 44ch;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #6d7a72;
 }
 
 .stack-intro h2 {
@@ -1239,7 +1269,7 @@ h1 em, h2 em {
 }
 
 .stack-chip {
-  padding: 12px 16px;
+  padding: 9px 13px;
   color: #5f6c64;
   border: 1px solid rgba(13,17,18,0.15);
   font-family: var(--font-mono);
@@ -1257,7 +1287,7 @@ h1 em, h2 em {
 .stack-chip--active {
   color: #225d2f;
   border-color: rgba(34,93,47,0.4);
-  background: rgba(201,245,106,0.35);
+  background: rgba(57,211,83,0.22);
 }
 
 /* Proof / About Section */
@@ -1583,7 +1613,7 @@ h1 em, h2 em {
     left: 12px;
     display: block;
     padding: 1px;
-    border: 1px solid rgba(201,245,106,0.5);
+    border: 1px solid rgba(57,211,83,0.45);
     background: rgba(13,17,18,0.85);
     backdrop-filter: blur(12px);
     box-shadow: 0 8px 30px rgba(0,0,0,0.3);
