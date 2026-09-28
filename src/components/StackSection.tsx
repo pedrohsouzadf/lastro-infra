@@ -5,62 +5,33 @@ import React from "react";
  *
  * A lista cobre só o que já foi usado em produção — nada entra aqui por
  * parecer bem numa vitrine.
- *
- * `DESTAQUE` marca o núcleo do serviço, não o que é mais bonito.
  */
 
 type Grupo = { label: string; itens: string[] };
 
 const GRUPOS: Grupo[] = [
   {
-    label: "Nuvem & infraestrutura como código",
-    itens: [
-      "AWS",
-      "Lambda",
-      "RDS",
-      "Cognito",
-      "API Gateway",
-      "Vercel",
-      "Supabase",
-      "Terraform",
-    ],
+    label: "Nuvem & infraestrutura",
+    itens: ["AWS", "Vercel", "Supabase", "Terraform"],
   },
   {
-    label: "Banco & controle de acesso",
-    itens: [
-      "PostgreSQL",
-      "RLS",
-      "Auth",
-      "Service role",
-      "Multi-tenancy",
-      "Migração Supabase → RDS",
-    ],
+    label: "Banco de dados",
+    itens: ["PostgreSQL", "RDS", "Backup & recuperação"],
   },
   {
-    label: "Aplicação & dados",
-    itens: ["React", "Vite", "Next.js", "SQL", "Python", "dbt", "Power BI"],
+    label: "Segurança & acesso",
+    itens: ["IAM", "Cognito", "RLS", "Secrets", "WAF"],
   },
   {
-    label: "Automação & IA",
+    label: "Operação",
     itens: [
-      "Google Apps Script",
-      "Sheets",
-      "WhatsApp Cloud API",
-      "Kommo",
-      "Make",
-      "GPTMaker",
-      "API da Anthropic",
+      "CI/CD",
+      "Monitoramento & alertas",
+      "Gestão de custos",
+      "Automação",
     ],
   },
 ];
-
-const DESTAQUE = new Set([
-  "AWS",
-  "Vercel",
-  "Supabase",
-  "Terraform",
-  "PostgreSQL",
-]);
 
 export default function StackSection() {
   return (
@@ -87,12 +58,7 @@ export default function StackSection() {
               <span className="stack-group__label">{grupo.label}</span>
               <div className="stack-cloud">
                 {grupo.itens.map((item) => (
-                  <span
-                    className={`stack-chip${
-                      DESTAQUE.has(item) ? " stack-chip--active" : ""
-                    }`}
-                    key={item}
-                  >
+                  <span className="stack-chip" key={item}>
                     {item}
                   </span>
                 ))}
