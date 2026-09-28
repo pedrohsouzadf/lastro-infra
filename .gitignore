@@ -16,3 +16,4 @@ fonte-build.tgz
 
 # sistema
 .DS_Store
+.tmp-build/

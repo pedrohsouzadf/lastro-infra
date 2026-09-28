@@ -1236,15 +1236,6 @@ h1 em, h2 em {
   color: #8a9790;
 }
 
-.stack-note {
-  margin: 6px 0 0;
-  padding-top: 22px;
-  border-top: 1px solid rgba(13, 17, 18, 0.12);
-  max-width: 44ch;
-  font-size: 13px;
-  line-height: 1.6;
-  color: #6d7a72;
-}
 
 .stack-intro h2 {
   color: var(--ink);

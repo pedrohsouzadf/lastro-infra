@@ -3,54 +3,53 @@ import React from "react";
 /**
  * Ferramentas agrupadas por área.
  *
- * O valor aqui não é a lista em si — é o fato de tudo já ter rodado em
- * produção. Por isso a linha de fecho embaixo: sem ela, vira vitrine de
- * logotipo, que qualquer um monta.
+ * A lista cobre só o que já foi usado em produção — nada entra aqui por
+ * parecer bem numa vitrine.
  *
- * `destaque` marca o núcleo do serviço, não o que é mais bonito.
+ * `DESTAQUE` marca o núcleo do serviço, não o que é mais bonito.
  */
 
 type Grupo = { label: string; itens: string[] };
 
 const GRUPOS: Grupo[] = [
   {
-    label: "Nuvem",
+    label: "Nuvem & infraestrutura como código",
     itens: [
       "AWS",
       "Lambda",
       "RDS",
-      "API Gateway",
       "Cognito",
-      "S3",
+      "API Gateway",
       "Vercel",
       "Supabase",
-      "Cloudflare",
+      "Terraform",
     ],
   },
   {
-    label: "Infra como código & entrega",
-    itens: ["Terraform", "Docker", "GitHub Actions"],
-  },
-  {
-    label: "Banco & dados",
+    label: "Banco & controle de acesso",
     itens: [
       "PostgreSQL",
-      "Multi-tenancy",
       "RLS",
-      "Migrações",
-      "SQL",
-      "Python",
-      "dbt",
+      "Auth",
+      "Service role",
+      "Multi-tenancy",
+      "Migração Supabase → RDS",
     ],
   },
   {
-    label: "Observabilidade & continuidade",
+    label: "Aplicação & dados",
+    itens: ["React", "Vite", "Next.js", "SQL", "Python", "dbt", "Power BI"],
+  },
+  {
+    label: "Automação & IA",
     itens: [
-      "Grafana",
-      "Alertas",
-      "Backups testados",
-      "Runbooks",
-      "Gestão de acessos",
+      "Google Apps Script",
+      "Sheets",
+      "WhatsApp Cloud API",
+      "Kommo",
+      "Make",
+      "GPTMaker",
+      "API da Anthropic",
     ],
   },
 ];
@@ -100,11 +99,6 @@ export default function StackSection() {
               </div>
             </div>
           ))}
-
-          <p className="stack-note">
-            Tudo nesta lista já foi provisionado, quebrado e consertado em
-            produção.
-          </p>
         </div>
       </div>
     </section>
